@@ -1,0 +1,87 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+
+}
+
+nav {
+    background-color: #14213d;
+}
+
+nav::after {
+    content: '';
+    clear: both;
+    display: table;
+}
+
+nav .logo {
+    color: white;
+    float: left;
+    font-size: 1.5em;
+    font-weight: 600;
+    line-height: 3em;
+    padding: 0 2em;
+}
+
+nav ul {
+    float: left;
+    list-style: none;
+    position: relative;
+}
+
+nav ul li {
+    display: inline-block;
+    margin: 0 5px;
+    background-color: #14213d;
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+    line-height: 4.8em;
+    font-size: 1em;
+    padding: 0.4em 0.8em;
+
+}
+
+nav ul li a:hover {
+    color: #cbf3f0;
+    border-radius: 12%;
+    box-shadow: 0 0 0.5em #e5e5e5,
+        0 0 0.5em #f6fff8;
+    transform: translateY(-0.25em);
+}
+
+nav ul ul li a:hover {
+    color: #cbf3f0;
+    box-shadow: none;
+}
+
+nav ul ul {
+    position: absolute;
+    top: 3.8em;
+    opacity: 0;
+    visibility: hidden;
+    transition: top 0.3s;
+}
+
+nav ul li:hover>ul {
+    opacity: 1;
+    visibility: visible;
+    top: 3.8em;
+}
+
+nav ul ul li {
+    position: relative;
+    margin: 0em;
+    width: 8.3em;
+    float: none;
+    display: list-item;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+}
+
+nav ul ul li a {
+    line-height: 2.7em;
+}
