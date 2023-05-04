@@ -16,3 +16,5 @@ const arrowBtn = document.getElementById("arrow-down");
 arrowBtn.addEventListener("click", () => {
     navLinks.classList.toggle("show1");
 })
+
+//for home page js

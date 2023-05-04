@@ -8,7 +8,6 @@
     <link rel="stylesheet" href="app.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
         integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
-
     <title>Home</title>
 
 </head>
@@ -16,22 +15,59 @@
 <body>
     <!-- <script src="script.js"></script> -->
     <script src="nav.js"></script>
-    <p id="intro">
-        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ad commodi libero sed repellat quasi, at soluta
-        nulla
-        magni corporis adipisci illum ipsa dicta odit fuga beatae ab earum odio alias.
-    </p>
+    <section class="container-fluid">
+        <section class="row intro-container">
+            <div class="col-12 align-text-top">
+                <h1>About me</h1>
+            </div>
+            <div class="col-md-6">
+                <span class="text first-text">I'm </span>
+                <span class="text-slider-items">
+                    Nann Theint Kham Ko Ko,
+                    a Computer Science Engineering student,
+                    studying in University of Pécs.
+                </span>
+                <span class="text-slider"></strong>
+            </div>
+            <br>
+            <br>
+            <div class="col-md-12">
+                <a href="about.html" class="btn btn-outline-info" role="button">Read more</a>
+            </div>
+        </section>
+    </section>
 
+
+
+    <!-- Typed text (animated typing effect)-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script src="https://unpkg.com/typed.js@2.0.16/dist/typed.umd.js"></script>
+    <script>
+        if ($(".text-slider").length == 1) {
+
+            var typed_strings =
+                $(".text-slider-items").text();
+
+            var typed = new Typed(".text-slider", {
+                strings: typed_strings.split(", "),
+                typeSpeed: 50,
+                loop: true,
+                backDelay: 900,
+                backSpeed: 30,
+            });
+        }
+    </script>
+    <!-- bootstrap js links -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
-        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
-        crossorigin="anonymous"></script>
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">
+        </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx"
         crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"
         integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous">
         </script>
-
+    <script src="script.js"></script>
 </body>
 
 </html>

@@ -28,6 +28,7 @@ document.write(`
                     <li><a href="index_Nann_A4A6YY.html">Home</a></li>
                     <li><a href="about.html">About</a></li>
                     <li><a href="#">Projects</a></li>
+                    <li><a href="gallery.html">Gallery</a></li>
                     <li>
                         <a href="#">More</a>
                         <i class='bx bxs-chevron-down arrow' id="arrow-down"></i>
@@ -37,7 +38,6 @@ document.write(`
                             <li><a href="#">Favorite</a></li>
                         </ul>
                     </li>
-                    <li><a href="gallery.html">Gallery</a></li>
                     <li><a id="contact" href=" contact.html">Contact</a></li>
 
                 </ul>
