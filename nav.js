@@ -28,14 +28,13 @@ document.write(`
                 <ul class="links">
                     <li><a data-active="home" href="index_Nann_A4A6YY.html">Home</a></li>
                     <li><a data-active="about" href="about.html">About</a></li>
-                    <li><a data-active="projects" href="project.html">Projects</a></li>
+                    <li><a data-active="project" href="project.html">Projects</a></li>
                     <li><a data-active="gallery" href="gallery.html">Gallery</a></li>
-                    <li>
+                    <li id="more">
                         <a href="#" data-active="more">More</a>
                         <i class='bx bxs-chevron-down arrow' id="arrow-down"></i>
-                        <ul class="sub-menu">
+                        <ul class="sub-menu p-1" id="sub-item">
                             <li><a href="country.html">My country</a></li>
-                            <li><a href="hobbies.html">Hobbies</a></li>
                             <li><a href="food.html">Favorite Food</a></li>
                         </ul>
                     </li>
