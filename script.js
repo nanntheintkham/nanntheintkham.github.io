@@ -1,4 +1,4 @@
-//sidebar open close js
+
 let menuOpenBtn = document.querySelector(".navbar .bx-menu");
 let closeOpenBtn = document.querySelector(".nav-link .bx-x");
 const navLinks = document.getElementById("nav-links");
@@ -15,6 +15,15 @@ closeOpenBtn.addEventListener("click", () => {
 const arrowBtn = document.getElementById("arrow-down");
 arrowBtn.addEventListener("click", () => {
     navLinks.classList.toggle("show1");
-})
+});
 
-//for home page js
+//nav bar active menu
+let links = document.querySelectorAll("nav .navbar .nav-link .links li a");
+let bodyId = document.querySelector("body").id;
+
+for (let link of links) {
+    if (link.dataset.active == bodyId) {
+        link.classList.add("active");
+    }
+}
+

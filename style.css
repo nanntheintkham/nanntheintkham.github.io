@@ -59,6 +59,12 @@ nav .navbar .nav-link .links li a {
     text-decoration: none;
     white-space: nowrap;
     font-weight: 500;
+    padding: 0.7em;
+}
+
+nav .navbar .nav-link .links li a:hover,
+nav .navbar .nav-link .links li a.active {
+    color: #13d1ff;
 }
 
 nav .navbar .nav-link .links li .arrow {

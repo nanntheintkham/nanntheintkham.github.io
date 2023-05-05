@@ -4,6 +4,7 @@ document.write(`
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
     <!-- google font link -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -25,20 +26,20 @@ document.write(`
                     <i class='bx bx-x'></i>
                 </div>
                 <ul class="links">
-                    <li><a href="index_Nann_A4A6YY.html">Home</a></li>
-                    <li><a href="about.html">About</a></li>
-                    <li><a href="#">Projects</a></li>
-                    <li><a href="gallery.html">Gallery</a></li>
+                    <li><a data-active="home" href="index_Nann_A4A6YY.html">Home</a></li>
+                    <li><a data-active="about" href="about.html">About</a></li>
+                    <li><a data-active="projects" href="project.html">Projects</a></li>
+                    <li><a data-active="gallery" href="gallery.html">Gallery</a></li>
                     <li>
-                        <a href="#">More</a>
+                        <a href="#" data-active="more">More</a>
                         <i class='bx bxs-chevron-down arrow' id="arrow-down"></i>
                         <ul class="sub-menu">
-                            <li><a href="#">My country</a></li>
-                            <li><a href="#">Hobbies</a></li>
-                            <li><a href="#">Favorite</a></li>
+                            <li><a href="country.html">My country</a></li>
+                            <li><a href="hobbies.html">Hobbies</a></li>
+                            <li><a href="food.html">Favorite Food</a></li>
                         </ul>
                     </li>
-                    <li><a id="contact" href=" contact.html">Contact</a></li>
+                    <li><a data-active="contact" href="contact.html">Contact</a></li>
 
                 </ul>
             </div>
@@ -47,6 +48,7 @@ document.write(`
                         style='color:#ffffff'></i></a>
                 <a href="https://www.linkedin.com/in/nann-theint-kham-ko-ko-767035262/"><i class='bx bxl-linkedin'
                         style='color:#ffffff'></i></a>
+                <a href="https://github.com/nanntheintkham"><i class='bx bxl-github' style='color:#ffffff'></i></a>
             </div>
         </div>
     </nav>
