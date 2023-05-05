@@ -26,7 +26,7 @@ document.write(`
                     <i class='bx bx-x'></i>
                 </div>
                 <ul class="links">
-                    <li><a data-active="home" href="index_Nann_A4A6YY.html">Home</a></li>
+                    <li><a data-active="home" href="index.html">Home</a></li>
                     <li><a data-active="about" href="about.html">About</a></li>
                     <li><a data-active="project" href="project.html">Projects</a></li>
                     <li><a data-active="gallery" href="gallery.html">Gallery</a></li>
