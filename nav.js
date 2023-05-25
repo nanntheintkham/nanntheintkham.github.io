@@ -30,14 +30,6 @@ document.write(`
                     <li><a data-active="about" href="about.html">About</a></li>
                     <li><a data-active="project" href="project.html">Projects</a></li>
                     <li><a data-active="gallery" href="gallery.html">Gallery</a></li>
-                    <li id="more">
-                        <a href="#" data-active="more">More</a>
-                        <i class='bx bxs-chevron-down arrow' id="arrow-down"></i>
-                        <ul class="sub-menu p-1" id="sub-item">
-                            <li><a href="country.html">My country</a></li>
-                            <li><a href="food.html">Favorite Food</a></li>
-                        </ul>
-                    </li>
                     <li><a data-active="contact" href="contact.html">Contact</a></li>
 
                 </ul>
