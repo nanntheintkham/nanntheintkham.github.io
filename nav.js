@@ -19,7 +19,7 @@ document.write(`
     <nav>
         <div class="navbar">
             <i class='bx bx-menu'></i>
-            <div class="logo"><a href="index_Nann_A4A6YY.html">NannTheint</a></div>
+            <div class="logo"><a href="index.html">NannTheint</a></div>
             <div class="nav-link" id="nav-links">
                 <div class="sidebar-logo">
                     <span class="logo_name">NannTheint</span>
