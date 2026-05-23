@@ -1,132 +1,887 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="app.css">
-    <!-- bootstrap css cdn link -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <!-- google font links -->
-    <!-- google font link -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
-    <title>Home</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nann Theint Kham Ko Ko — Data Science & Analytics Portfolio</title>
+<meta name="description" content="MSc Data Science student & junior data engineer. ETL pipelines, machine learning, and analytics with Python, SQL, Azure, dbt, and Power BI.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0b1220;
+    --bg-elev: #111a2e;
+    --bg-card: #131e36;
+    --border: #1f2c4a;
+    --border-strong: #2a3a60;
+    --text: #e6edf7;
+    --text-muted: #97a3bd;
+    --text-dim: #6b7896;
+    --accent: #5eead4;
+    --accent-2: #7dd3fc;
+    --accent-soft: rgba(94, 234, 212, 0.12);
+    --chip-bg: #1a2540;
+    --shadow: 0 10px 40px rgba(0,0,0,0.35);
+    --radius: 14px;
+    --radius-sm: 8px;
+    --max: 1100px;
+  }
 
+  @media (prefers-color-scheme: light) {
+    :root {
+      --bg: #f8fafc;
+      --bg-elev: #ffffff;
+      --bg-card: #ffffff;
+      --border: #e2e8f0;
+      --border-strong: #cbd5e1;
+      --text: #0f172a;
+      --text-muted: #475569;
+      --text-dim: #64748b;
+      --accent: #0d9488;
+      --accent-2: #0284c7;
+      --accent-soft: rgba(13, 148, 136, 0.10);
+      --chip-bg: #f1f5f9;
+      --shadow: 0 8px 24px rgba(15, 23, 42, 0.08);
+    }
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  code, .mono { font-family: 'JetBrains Mono', monospace; font-size: 0.9em; }
+
+  .container {
+    max-width: var(--max);
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  /* Nav */
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: rgba(11, 18, 32, 0.85);
+    backdrop-filter: saturate(180%) blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+  @media (prefers-color-scheme: light) {
+    nav { background: rgba(248, 250, 252, 0.85); }
+  }
+  .nav-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 24px;
+    max-width: var(--max);
+    margin: 0 auto;
+  }
+  .nav-brand {
+    font-weight: 700;
+    font-size: 0.95rem;
+    color: var(--text);
+    text-decoration: none;
+    letter-spacing: -0.01em;
+  }
+  .nav-brand span { color: var(--accent); }
+  .nav-links {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+  }
+  .nav-links a {
+    color: var(--text-muted);
+    text-decoration: none;
+    font-size: 0.9rem;
+    padding: 6px 12px;
+    border-radius: 6px;
+    transition: all 0.15s;
+  }
+  .nav-links a:hover { color: var(--text); background: var(--accent-soft); }
+  @media (max-width: 640px) {
+    .nav-links a:not(.nav-cta) { display: none; }
+  }
+
+  /* Hero */
+  header.hero {
+    padding: 80px 0 60px;
+    border-bottom: 1px solid var(--border);
+    background:
+      radial-gradient(ellipse at top left, var(--accent-soft), transparent 50%),
+      radial-gradient(ellipse at bottom right, rgba(125, 211, 252, 0.08), transparent 50%);
+  }
+  .hero-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 14px;
+    background: var(--accent-soft);
+    color: var(--accent);
+    border-radius: 999px;
+    font-size: 0.82rem;
+    font-weight: 500;
+    margin-bottom: 24px;
+    border: 1px solid rgba(94, 234, 212, 0.25);
+  }
+  .hero-tag::before {
+    content: "";
+    width: 6px;
+    height: 6px;
+    background: var(--accent);
+    border-radius: 50%;
+    box-shadow: 0 0 8px var(--accent);
+  }
+  h1 {
+    font-size: clamp(2rem, 5vw, 3.2rem);
+    font-weight: 800;
+    margin: 0 0 16px;
+    line-height: 1.1;
+    letter-spacing: -0.025em;
+  }
+  .hero-subtitle {
+    font-size: clamp(1.05rem, 2vw, 1.25rem);
+    color: var(--text-muted);
+    max-width: 640px;
+    margin: 0 0 28px;
+  }
+  .hero-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px 24px;
+    color: var(--text-dim);
+    font-size: 0.9rem;
+    margin-bottom: 28px;
+  }
+  .hero-meta span { display: inline-flex; align-items: center; gap: 6px; }
+  .hero-cta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 18px;
+    border-radius: 8px;
+    font-weight: 500;
+    font-size: 0.92rem;
+    text-decoration: none;
+    transition: all 0.15s;
+    border: 1px solid var(--border-strong);
+  }
+  .btn-primary {
+    background: var(--accent);
+    color: var(--bg);
+    border-color: var(--accent);
+  }
+  .btn-primary:hover { transform: translateY(-1px); box-shadow: 0 6px 16px rgba(94, 234, 212, 0.25); }
+  .btn-secondary {
+    background: var(--bg-elev);
+    color: var(--text);
+  }
+  .btn-secondary:hover { border-color: var(--accent); color: var(--accent); }
+
+  /* Sections */
+  section {
+    padding: 72px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .section-label {
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--accent);
+    margin-bottom: 12px;
+  }
+  h2 {
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    font-weight: 700;
+    margin: 0 0 12px;
+    letter-spacing: -0.02em;
+  }
+  .section-intro {
+    color: var(--text-muted);
+    max-width: 640px;
+    margin: 0 0 40px;
+  }
+
+  /* About */
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+    align-items: start;
+  }
+  @media (max-width: 768px) {
+    .about-grid { grid-template-columns: 1fr; gap: 32px; }
+  }
+  .about-text p { color: var(--text-muted); margin: 0 0 16px; }
+  .about-text p:last-child { margin: 0; }
+  .quick-facts {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 24px;
+  }
+  .quick-facts h3 {
+    font-size: 0.95rem;
+    margin: 0 0 16px;
+    color: var(--text);
+  }
+  .fact-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 0.92rem;
+  }
+  .fact-row:last-child { border: 0; }
+  .fact-label { color: var(--text-dim); }
+  .fact-value { color: var(--text); font-weight: 500; }
+
+  /* Skills */
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 16px;
+  }
+  .skill-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 22px;
+    transition: all 0.2s;
+  }
+  .skill-card:hover { border-color: var(--border-strong); transform: translateY(-2px); }
+  .skill-card h3 {
+    font-size: 0.92rem;
+    margin: 0 0 14px;
+    color: var(--accent);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .skill-card h3 svg { width: 18px; height: 18px; }
+  .chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+  .chip {
+    background: var(--chip-bg);
+    color: var(--text-muted);
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    border: 1px solid transparent;
+  }
+
+  /* Projects */
+  .project-category {
+    margin-bottom: 48px;
+  }
+  .project-category:last-child { margin: 0; }
+  .category-header {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    margin-bottom: 20px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--border);
+  }
+  .category-header h3 {
+    font-size: 1.1rem;
+    margin: 0;
+    color: var(--text);
+  }
+  .category-header .count {
+    color: var(--text-dim);
+    font-size: 0.85rem;
+    font-family: 'JetBrains Mono', monospace;
+  }
+  .project-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 18px;
+  }
+  .project-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    transition: all 0.2s;
+    position: relative;
+    overflow: hidden;
+  }
+  .project-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--accent), var(--accent-2));
+    opacity: 0;
+    transition: opacity 0.2s;
+  }
+  .project-card:hover { border-color: var(--border-strong); transform: translateY(-3px); box-shadow: var(--shadow); }
+  .project-card:hover::before { opacity: 1; }
+  .project-card h4 {
+    font-size: 1.08rem;
+    margin: 0 0 10px;
+    color: var(--text);
+    font-weight: 600;
+  }
+  .project-card p.desc {
+    color: var(--text-muted);
+    margin: 0 0 16px;
+    font-size: 0.93rem;
+    flex: 1;
+  }
+  .project-card .stack {
+    margin-bottom: 16px;
+  }
+  .project-card .links {
+    display: flex;
+    gap: 14px;
+    font-size: 0.85rem;
+  }
+  .project-card .links a {
+    color: var(--accent);
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-weight: 500;
+  }
+  .project-card .links a:hover { text-decoration: underline; }
+  .project-card .links .muted {
+    color: var(--text-dim);
+    font-style: italic;
+  }
+
+  /* Experience & Education */
+  .timeline {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  .timeline-item {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 24px;
+    position: relative;
+  }
+  .timeline-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 6px;
+  }
+  .timeline-title { font-weight: 600; font-size: 1.05rem; color: var(--text); }
+  .timeline-org { color: var(--accent); font-weight: 500; font-size: 0.95rem; margin-bottom: 4px; }
+  .timeline-date { color: var(--text-dim); font-size: 0.85rem; font-family: 'JetBrains Mono', monospace; white-space: nowrap; }
+  .timeline-location { color: var(--text-dim); font-size: 0.85rem; margin-bottom: 12px; }
+  .timeline-item ul { color: var(--text-muted); padding-left: 20px; margin: 12px 0 0; }
+  .timeline-item li { margin-bottom: 6px; font-size: 0.92rem; }
+  .timeline-coursework {
+    margin-top: 12px;
+    padding-top: 12px;
+    border-top: 1px solid var(--border);
+    color: var(--text-muted);
+    font-size: 0.88rem;
+  }
+  .timeline-coursework strong { color: var(--text); }
+
+  /* Languages */
+  .lang-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .lang {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 12px 18px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .lang strong { color: var(--text); }
+  .lang span { color: var(--text-dim); font-size: 0.85rem; }
+
+  /* Footer */
+  footer {
+    padding: 48px 0 32px;
+    text-align: center;
+    color: var(--text-dim);
+    font-size: 0.88rem;
+  }
+  footer a { color: var(--accent); text-decoration: none; }
+  footer a:hover { text-decoration: underline; }
+  .footer-links {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    margin-bottom: 16px;
+    flex-wrap: wrap;
+  }
+
+  /* Icons via inline SVG (no external deps) */
+  .icon { width: 16px; height: 16px; display: inline-block; vertical-align: -3px; }
+</style>
 </head>
+<body>
 
-<body id="home">
-    <!-- <script src="script.js"></script> -->
-    <script src="nav.js"></script>
-    <section class="container-fluid">
-        <section class="row intro-container">
-            <div class="col-12 align-text-top">
-                <h1>About me</h1>
-            </div>
-            <div class="col-md-6">
-                <span class="text first-text">I'm </span>
-                <span class="text-slider-items">
-                    Nann Theint Kham Ko Ko,
-                    a Computer Science Engineering student,
-                    studying in University of Pécs.
-                </span>
-                <span class="text-slider"></strong>
-            </div>
-            <br>
-            <br>
-            <div class="col-md-12">
-                <a href="about.html" class="btn btn-outline-info" role="button">Read more</a>
-            </div>
-        </section>
-    </section>
+<nav>
+  <div class="nav-inner">
+    <a href="#top" class="nav-brand">Nann <span>·</span> Data Portfolio</a>
+    <div class="nav-links">
+      <a href="#about">About</a>
+      <a href="#skills">Skills</a>
+      <a href="#projects">Projects</a>
+      <a href="#experience">Experience</a>
+      <a href="#education">Education</a>
+      <a href="mailto:nanntheint.dev@gmail.com" class="nav-cta">Contact</a>
+    </div>
+  </div>
+</nav>
 
-    <section class="container-fluid carousel-project border-dark text-center">
-        <h1>Projects</h1>
-        <!-- Carousel -->
+<header class="hero" id="top">
+  <div class="container">
+    <div class="hero-tag">Available 20+ hrs/week · Open to internships & part-time roles</div>
+    <h1>Nann Theint Kham Ko Ko</h1>
+    <p class="hero-subtitle">
+      MSc Data Science student and junior data engineer.
+      I build ETL pipelines, untangle messy enterprise data, and turn the results into something a non-technical stakeholder can actually use.
+    </p>
+    <div class="hero-meta">
+      <span>
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        Budapest, Hungary
+      </span>
+      <span>
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        nanntheint.dev@gmail.com
+      </span>
+      <span>
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        +36 30 076 4080
+      </span>
+    </div>
+    <div class="hero-cta">
+      <a href="https://github.com/nanntheintkham" class="btn btn-primary" target="_blank" rel="noopener">
+        <svg class="icon" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.44 9.8 8.21 11.39.6.11.82-.26.82-.58v-2.17c-3.34.72-4.04-1.41-4.04-1.41-.55-1.39-1.34-1.76-1.34-1.76-1.08-.74.08-.73.08-.73 1.21.09 1.84 1.24 1.84 1.24 1.07 1.83 2.81 1.3 3.49.99.11-.78.42-1.3.76-1.6-2.66-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.13-.3-.54-1.52.12-3.18 0 0 1.01-.32 3.3 1.23a11.5 11.5 0 0 1 6 0c2.29-1.55 3.3-1.23 3.3-1.23.66 1.66.25 2.88.12 3.18.77.84 1.24 1.91 1.24 3.22 0 4.61-2.81 5.62-5.49 5.92.43.37.81 1.1.81 2.22v3.29c0 .32.22.7.83.58A12 12 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+        GitHub
+      </a>
+      <a href="https://www.linkedin.com/in/nanntheintkham/" class="btn btn-secondary" target="_blank" rel="noopener">
+        <svg class="icon" viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.13 1.45-2.13 2.94v5.67H9.36V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.38-1.85 3.61 0 4.28 2.37 4.28 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.2 0 22.22 0z"/></svg>
+        LinkedIn
+      </a>
+      <a href="mailto:nanntheint.dev@gmail.com" class="btn btn-secondary">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        Email
+      </a>
+    </div>
+  </div>
+</header>
 
-        <div class="container">
-            <div class="row justify-content-md-center">
-                <div class="col-md-8">
-                    <div id="carouselCaptions" class="carousel slide" data-bs-ride="carousel">
-                        <div class="carousel-inner">
-                            <div class="carousel-item active">
-                                <a href="project.html"><img
-                                        src="https://images.unsplash.com/photo-1595623654300-b27329804025?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80"
-                                        class="img-fluid d-block w-100" alt="..."></a>
-                                <div class="carousel-caption d-none d-md-block">
-                                    <h5>Bus Reservation System</h5>
-                                    <p>C console application with login and
-                                        sign up option</p>
-                                </div>
-                            </div>
-                            <div class="carousel-item">
-                                <a href="project.html"><img
-                                        src="https://images.unsplash.com/photo-1616401784845-180882ba9ba8?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80"
-                                        class="d-block w-100" alt="..."></a>
-                                <div class="carousel-caption d-none d-md-block">
-                                    <h5>Product Order Processing</h5>
-                                    <p>Java Console application with file processor</p>
-                                </div>
-                            </div>
-                            <div class="carousel-item">
-                                <a href="project.html"><img
-                                        src="https://images.unsplash.com/photo-1512656182047-45353ebe62ef?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80"
-                                        class="d-block w-100" alt="..."></a>
-                                <div class="carousel-caption d-none d-md-block">
-                                    <h5>Read more about projects</h5>
-                                    <p>Click the image to read about my projects</p>
-                                </div>
-                            </div>
-                        </div>
-                        <button class="carousel-control-prev" type="button" data-bs-target="#carouselCaptions"
-                            data-bs-slide="prev">
-                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                            <span class="visually-hidden">Previous</span>
-                        </button>
-                        <button class="carousel-control-next" type="button" data-bs-target="#carouselCaptions"
-                            data-bs-slide="next">
-                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                            <span class="visually-hidden">Next</span>
-                        </button>
-                    </div>
-                </div>
-            </div>
+<section id="about">
+  <div class="container">
+    <div class="section-label">About</div>
+    <h2>Where I'm focused right now</h2>
+    <div class="about-grid">
+      <div class="about-text">
+        <p>
+          I'm an MSc Data Science student at <strong>ELTE in Budapest</strong>, with a background in computer science engineering and one summer of hands-on data engineering at Tata Consultancy Services.
+        </p>
+        <p>
+          Most of my recent work has involved building ETL pipelines, cleaning enterprise datasets, and translating analytical output into something useful for people who don't write SQL. My coursework covers machine learning, statistical methods, and applied math, and I've run enough real projects to know where the textbook stops matching the data.
+        </p>
+        <p>
+          I'm looking for a part-time or internship role in data engineering, analytics, or applied ML — the kind of role where the question is genuinely open and the data is genuinely messy.
+        </p>
+      </div>
+      <aside class="quick-facts">
+        <h3>Quick facts</h3>
+        <div class="fact-row"><span class="fact-label">Currently</span><span class="fact-value">MSc Data Science @ ELTE</span></div>
+        <div class="fact-row"><span class="fact-label">Based in</span><span class="fact-value">Budapest, Hungary</span></div>
+        <div class="fact-row"><span class="fact-label">Available</span><span class="fact-value">20+ hrs/week</span></div>
+        <div class="fact-row"><span class="fact-label">Open to</span><span class="fact-value">Internships, part-time</span></div>
+        <div class="fact-row"><span class="fact-label">Languages</span><span class="fact-value">EN · MY · KO</span></div>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="container">
+    <div class="section-label">Skills</div>
+    <h2>Tools I reach for</h2>
+    <p class="section-intro">Stacked roughly by how often I use them. The ones I'd put on a job application without hesitation are bolded in the chips.</p>
+    <div class="skills-grid">
+      <div class="skill-card">
+        <h3>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+          Programming
+        </h3>
+        <div class="chips">
+          <span class="chip">Python</span>
+          <span class="chip">SQL</span>
+          <span class="chip">Bash</span>
+          <span class="chip">JavaScript</span>
+          <span class="chip">Java</span>
         </div>
-    </section>
+      </div>
+      <div class="skill-card">
+        <h3>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5v14a9 3 0 0 0 18 0V5"/><path d="M3 12a9 3 0 0 0 18 0"/></svg>
+          Data & Analytics
+        </h3>
+        <div class="chips">
+          <span class="chip">ETL pipelines</span>
+          <span class="chip">dbt</span>
+          <span class="chip">Pandas</span>
+          <span class="chip">NumPy</span>
+          <span class="chip">Data cleaning</span>
+          <span class="chip">Data storytelling</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <h3>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09a1.65 1.65 0 0 0-1-1.51 1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+          AI / Machine Learning
+        </h3>
+        <div class="chips">
+          <span class="chip">scikit-learn</span>
+          <span class="chip">Supervised learning</span>
+          <span class="chip">Unsupervised learning</span>
+          <span class="chip">Feature engineering</span>
+          <span class="chip">Cross-validation</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <h3>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"/></svg>
+          Cloud & Automation
+        </h3>
+        <div class="chips">
+          <span class="chip">Azure</span>
+          <span class="chip">Azure Data Factory</span>
+          <span class="chip">Google Cloud</span>
+          <span class="chip">GitHub Actions</span>
+          <span class="chip">CI/CD</span>
+          <span class="chip">Linux</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <h3>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+          BI & Visualization
+        </h3>
+        <div class="chips">
+          <span class="chip">Power BI</span>
+          <span class="chip">Tableau</span>
+          <span class="chip">Excel</span>
+          <span class="chip">matplotlib</span>
+          <span class="chip">seaborn</span>
+          <span class="chip">plotly</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <h3>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          How I work
+        </h3>
+        <div class="chips">
+          <span class="chip">Critical thinking</span>
+          <span class="chip">Problem solving</span>
+          <span class="chip">Cross-team collaboration</span>
+          <span class="chip">Proactivity</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
+<section id="projects">
+  <div class="container">
+    <div class="section-label">Projects</div>
+    <h2>Selected work</h2>
+    <p class="section-intro">Grouped by what the project is actually about. Source on GitHub where available — a couple of work projects (Azure ETL at TCS) are described from experience rather than linked.</p>
 
-    <!-- Typed text (animated typing effect)-->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
-    <script src="https://unpkg.com/typed.js@2.0.16/dist/typed.umd.js"></script>
-    <script>
-        if ($(".text-slider").length == 1) {
+    <div class="project-category">
+      <div class="category-header">
+        <h3>Data Engineering</h3>
+        <span class="count">01</span>
+      </div>
+      <div class="project-grid">
+        <article class="project-card">
+          <h4>Azure ETL Pipeline — Enterprise Data Automation</h4>
+          <p class="desc">
+            Built and automated ETL pipelines that clean, transform, and validate enterprise datasets for downstream analytics and AI use cases. Designed dbt test logic to enforce schema integrity and consistent business metrics across multiple data domains. Reduced manual data preparation effort by automating recurring transformation steps end-to-end.
+          </p>
+          <div class="stack chips">
+            <span class="chip">Azure Data Factory</span>
+            <span class="chip">dbt</span>
+            <span class="chip">Python</span>
+            <span class="chip">SQL</span>
+            <span class="chip">Linux</span>
+          </div>
+          <div class="links">
+            <span class="muted">Internship work — code not public</span>
+          </div>
+        </article>
+      </div>
+    </div>
 
-            var typed_strings =
-                $(".text-slider-items").text();
+    <div class="project-category">
+      <div class="category-header">
+        <h3>Machine Learning</h3>
+        <span class="count">01</span>
+      </div>
+      <div class="project-grid">
+        <article class="project-card">
+          <h4>Network Intrusion Detection — CICIDS2017</h4>
+          <p class="desc">
+            Multi-class classification of network attacks on the CICIDS2017 dataset. Compared seven classifiers (Logistic Regression, KNN, Decision Tree, Random Forest, Gradient Boosting, SVC, Gaussian NB), ran Monte-Carlo cross-validation with a Friedman test for statistical significance, and tuned the top model with RandomizedSearchCV.
+          </p>
+          <div class="stack chips">
+            <span class="chip">Python</span>
+            <span class="chip">scikit-learn</span>
+            <span class="chip">Pandas</span>
+            <span class="chip">PCA</span>
+            <span class="chip">Statistical testing</span>
+          </div>
+          <div class="links">
+            <a href="https://github.com/nanntheintkham/network-intrusion-detection-cicids2017" target="_blank" rel="noopener">
+              <svg class="icon" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.44 9.8 8.21 11.39.6.11.82-.26.82-.58v-2.17c-3.34.72-4.04-1.41-4.04-1.41-.55-1.39-1.34-1.76-1.34-1.76-1.08-.74.08-.73.08-.73 1.21.09 1.84 1.24 1.84 1.24 1.07 1.83 2.81 1.3 3.49.99.11-.78.42-1.3.76-1.6-2.66-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.13-.3-.54-1.52.12-3.18 0 0 1.01-.32 3.3 1.23a11.5 11.5 0 0 1 6 0c2.29-1.55 3.3-1.23 3.3-1.23.66 1.66.25 2.88.12 3.18.77.84 1.24 1.91 1.24 3.22 0 4.61-2.81 5.62-5.49 5.92.43.37.81 1.1.81 2.22v3.29c0 .32.22.7.83.58A12 12 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+              View repo
+            </a>
+          </div>
+        </article>
+      </div>
+    </div>
 
-            var typed = new Typed(".text-slider", {
-                strings: typed_strings.split(", "),
-                typeSpeed: 50,
-                loop: true,
-                backDelay: 900,
-                backSpeed: 30,
-            });
-        }
-    </script>
-    <!-- bootstrap js links -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-        crossorigin="anonymous"></script>
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
-        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">
-        </script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
-        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous">
-        </script>
-    <script src="script.js"></script>
+    <div class="project-category">
+      <div class="category-header">
+        <h3>Data Analytics & BI</h3>
+        <span class="count">02</span>
+      </div>
+      <div class="project-grid">
+        <article class="project-card">
+          <h4>Global Superstore Sales Analysis</h4>
+          <p class="desc">
+            Exploratory analysis of the Global Superstore retail dataset in a Jupyter notebook. Profiled customer segments, product categories, and shipping performance; identified the loss-making sub-categories that were dragging down otherwise healthy regions.
+          </p>
+          <div class="stack chips">
+            <span class="chip">Python</span>
+            <span class="chip">Pandas</span>
+            <span class="chip">matplotlib</span>
+            <span class="chip">seaborn</span>
+            <span class="chip">Jupyter</span>
+          </div>
+          <div class="links">
+            <a href="https://github.com/nanntheintkham/Sales-Analysis-Global-Superstore" target="_blank" rel="noopener">
+              <svg class="icon" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.44 9.8 8.21 11.39.6.11.82-.26.82-.58v-2.17c-3.34.72-4.04-1.41-4.04-1.41-.55-1.39-1.34-1.76-1.34-1.76-1.08-.74.08-.73.08-.73 1.21.09 1.84 1.24 1.84 1.24 1.07 1.83 2.81 1.3 3.49.99.11-.78.42-1.3.76-1.6-2.66-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.13-.3-.54-1.52.12-3.18 0 0 1.01-.32 3.3 1.23a11.5 11.5 0 0 1 6 0c2.29-1.55 3.3-1.23 3.3-1.23.66 1.66.25 2.88.12 3.18.77.84 1.24 1.91 1.24 3.22 0 4.61-2.81 5.62-5.49 5.92.43.37.81 1.1.81 2.22v3.29c0 .32.22.7.83.58A12 12 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+              View repo
+            </a>
+          </div>
+        </article>
+        <article class="project-card">
+          <h4>Contoso Sales Report — Power BI Dashboard</h4>
+          <p class="desc">
+            Interactive Power BI dashboard on the Contoso sample dataset. Surfaces performance trends across operational funnels — product, region, time — and translates raw transactions into visuals tailored for non-technical, business-facing audiences.
+          </p>
+          <div class="stack chips">
+            <span class="chip">Power BI</span>
+            <span class="chip">DAX</span>
+            <span class="chip">Data modeling</span>
+          </div>
+          <div class="links">
+            <a href="https://github.com/nanntheintkham/contoso-sales-report" target="_blank" rel="noopener">
+              <svg class="icon" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.44 9.8 8.21 11.39.6.11.82-.26.82-.58v-2.17c-3.34.72-4.04-1.41-4.04-1.41-.55-1.39-1.34-1.76-1.34-1.76-1.08-.74.08-.73.08-.73 1.21.09 1.84 1.24 1.84 1.24 1.07 1.83 2.81 1.3 3.49.99.11-.78.42-1.3.76-1.6-2.66-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.13-.3-.54-1.52.12-3.18 0 0 1.01-.32 3.3 1.23a11.5 11.5 0 0 1 6 0c2.29-1.55 3.3-1.23 3.3-1.23.66 1.66.25 2.88.12 3.18.77.84 1.24 1.91 1.24 3.22 0 4.61-2.81 5.62-5.49 5.92.43.37.81 1.1.81 2.22v3.29c0 .32.22.7.83.58A12 12 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+              View repo
+            </a>
+          </div>
+        </article>
+      </div>
+    </div>
+
+    <div class="project-category">
+      <div class="category-header">
+        <h3>Software Engineering</h3>
+        <span class="count">03</span>
+      </div>
+      <div class="project-grid">
+        <article class="project-card">
+          <h4>E-commerce Platform — Digital & Physical Goods</h4>
+          <p class="desc">
+            Full-stack e-commerce site selling both physical and digital products, with secure user authentication and integrated payment processing. Built access-controlled delivery for digital products to prevent unauthorized downloads. Deployed on AWS with a PostgreSQL backend; CI/CD via GitHub Actions.
+          </p>
+          <div class="stack chips">
+            <span class="chip">Django</span>
+            <span class="chip">PostgreSQL</span>
+            <span class="chip">AWS</span>
+            <span class="chip">GitHub Actions</span>
+          </div>
+          <div class="links">
+            <a href="https://github.com/nanntheintkham/ecommerce" target="_blank" rel="noopener">
+              <svg class="icon" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.44 9.8 8.21 11.39.6.11.82-.26.82-.58v-2.17c-3.34.72-4.04-1.41-4.04-1.41-.55-1.39-1.34-1.76-1.34-1.76-1.08-.74.08-.73.08-.73 1.21.09 1.84 1.24 1.84 1.24 1.07 1.83 2.81 1.3 3.49.99.11-.78.42-1.3.76-1.6-2.66-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.13-.3-.54-1.52.12-3.18 0 0 1.01-.32 3.3 1.23a11.5 11.5 0 0 1 6 0c2.29-1.55 3.3-1.23 3.3-1.23.66 1.66.25 2.88.12 3.18.77.84 1.24 1.91 1.24 3.22 0 4.61-2.81 5.62-5.49 5.92.43.37.81 1.1.81 2.22v3.29c0 .32.22.7.83.58A12 12 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+              View repo
+            </a>
+          </div>
+        </article>
+        <article class="project-card">
+          <h4>Personal Assistant — Java Desktop App</h4>
+          <p class="desc">
+            Java desktop application bundling small personal-productivity utilities: weekly health tracking, a tax calculator, and a database-backed display layer. Built as an early exercise in modular Java design and persistent storage.
+          </p>
+          <div class="stack chips">
+            <span class="chip">Java</span>
+            <span class="chip">OOP</span>
+            <span class="chip">Desktop UI</span>
+          </div>
+          <div class="links">
+            <a href="https://github.com/nanntheintkham/Personal-Assistant" target="_blank" rel="noopener">
+              <svg class="icon" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.44 9.8 8.21 11.39.6.11.82-.26.82-.58v-2.17c-3.34.72-4.04-1.41-4.04-1.41-.55-1.39-1.34-1.76-1.34-1.76-1.08-.74.08-.73.08-.73 1.21.09 1.84 1.24 1.84 1.24 1.07 1.83 2.81 1.3 3.49.99.11-.78.42-1.3.76-1.6-2.66-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.13-.3-.54-1.52.12-3.18 0 0 1.01-.32 3.3 1.23a11.5 11.5 0 0 1 6 0c2.29-1.55 3.3-1.23 3.3-1.23.66 1.66.25 2.88.12 3.18.77.84 1.24 1.91 1.24 3.22 0 4.61-2.81 5.62-5.49 5.92.43.37.81 1.1.81 2.22v3.29c0 .32.22.7.83.58A12 12 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+              View repo
+            </a>
+          </div>
+        </article>
+        <article class="project-card">
+          <h4>Car Service Management — Windows Forms</h4>
+          <p class="desc">
+            Windows desktop app for managing a car service workflow: bookings, worksheets, and payments via a multi-screen WinForms UI. Built in C# as a coursework project covering desktop UI design and event-driven programming.
+          </p>
+          <div class="stack chips">
+            <span class="chip">C#</span>
+            <span class="chip">WinForms</span>
+            <span class="chip">.NET</span>
+          </div>
+          <div class="links">
+            <a href="https://github.com/nanntheintkham/CarService" target="_blank" rel="noopener">
+              <svg class="icon" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.44 9.8 8.21 11.39.6.11.82-.26.82-.58v-2.17c-3.34.72-4.04-1.41-4.04-1.41-.55-1.39-1.34-1.76-1.34-1.76-1.08-.74.08-.73.08-.73 1.21.09 1.84 1.24 1.84 1.24 1.07 1.83 2.81 1.3 3.49.99.11-.78.42-1.3.76-1.6-2.66-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.13-.3-.54-1.52.12-3.18 0 0 1.01-.32 3.3 1.23a11.5 11.5 0 0 1 6 0c2.29-1.55 3.3-1.23 3.3-1.23.66 1.66.25 2.88.12 3.18.77.84 1.24 1.91 1.24 3.22 0 4.61-2.81 5.62-5.49 5.92.43.37.81 1.1.81 2.22v3.29c0 .32.22.7.83.58A12 12 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+              View repo
+            </a>
+          </div>
+        </article>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section id="experience">
+  <div class="container">
+    <div class="section-label">Experience</div>
+    <h2>Where I've worked</h2>
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="timeline-head">
+          <div>
+            <div class="timeline-title">Data Engineer Intern</div>
+            <div class="timeline-org">Tata Consultancy Services</div>
+            <div class="timeline-location">Budapest, Hungary</div>
+          </div>
+          <span class="timeline-date">Jun 2024 – Aug 2024</span>
+        </div>
+        <ul>
+          <li>Built and automated ETL pipelines in Python and SQL, improving data reliability and reducing manual processing across enterprise reporting workflows.</li>
+          <li>Designed scalable, repeatable data integration processes connecting cross-platform sources for strategic analytics and ad hoc business reporting.</li>
+          <li>Analyzed existing data processes and proposed automation improvements, applying critical thinking to remove bottlenecks.</li>
+          <li>Translated complex datasets into clear, actionable insights and presented findings to cross-functional stakeholders.</li>
+        </ul>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-head">
+          <div>
+            <div class="timeline-title">Volunteer Coordinator</div>
+            <div class="timeline-org">Erasmus Student Network — University of Pécs</div>
+            <div class="timeline-location">Pécs, Hungary</div>
+          </div>
+          <span class="timeline-date">Spring 2023 – Spring 2024</span>
+        </div>
+        <ul>
+          <li>Organised international events for 150+ students, supporting cultural integration and community engagement.</li>
+          <li>Trained and mentored new volunteers, fostering teamwork and a solutions-oriented mindset.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="education">
+  <div class="container">
+    <div class="section-label">Education</div>
+    <h2>Where I studied</h2>
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="timeline-head">
+          <div>
+            <div class="timeline-title">MSc in Data Science</div>
+            <div class="timeline-org">Eötvös Loránd University (ELTE)</div>
+            <div class="timeline-location">Budapest, Hungary</div>
+          </div>
+          <span class="timeline-date">Sep 2025 – Present</span>
+        </div>
+        <div class="timeline-coursework">
+          <strong>Relevant coursework:</strong> Machine Learning, Statistical Methods, Advanced Algorithms, Data Mining, AI Foundations, Probability & Linear Algebra.
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-head">
+          <div>
+            <div class="timeline-title">BSc in Computer Science Engineering</div>
+            <div class="timeline-org">University of Pécs</div>
+            <div class="timeline-location">Pécs, Hungary</div>
+          </div>
+          <span class="timeline-date">Sep 2021 – Jan 2025</span>
+        </div>
+        <div class="timeline-coursework">
+          <strong>Relevant coursework:</strong> Data Engineering, Machine Learning, Cloud Computing, DevOps, Project Management, Discrete Mathematics, Calculus & Statistics.
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top: 40px;">
+      <div class="section-label">Languages</div>
+      <div class="lang-row">
+        <div class="lang"><strong>Burmese</strong> <span>Native</span></div>
+        <div class="lang"><strong>English</strong> <span>Professional</span></div>
+        <div class="lang"><strong>Korean</strong> <span>Intermediate</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="footer-links">
+      <a href="mailto:nanntheint.dev@gmail.com">nanntheint.dev@gmail.com</a>
+      <a href="https://github.com/nanntheintkham" target="_blank" rel="noopener">GitHub</a>
+      <a href="https://www.linkedin.com/in/nanntheintkham/" target="_blank" rel="noopener">LinkedIn</a>
+    </div>
+    <div>Built in 2026 · Budapest, Hungary</div>
+  </div>
+</footer>
+
 </body>
-
 </html>
